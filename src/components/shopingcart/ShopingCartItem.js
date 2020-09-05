@@ -1,25 +1,34 @@
-import React, { Component } from 'react'
+import React, { Component, useContext, useState, useEffect } from 'react'
+import { CartContext } from '../../context/CartContext';
 
-const ShopingCartItem = () => {
+const ShopingCartItem = ({ item }) => {
+    const { DescAmount, IncAmount } = useContext(CartContext)
+    const [total, setTotal] = useState(0)
+    useEffect(() => {
+        setTotal(item.price * item.amount)
+    }, [])
+  
     return (
         <tr>
             <td class="shoping__cart__item">
                 <img src="img/cart/cart-1.jpg" alt="" />
-                <h5>Vegetable’s Package</h5>
+                <h5>{item.name}</h5>
             </td>
             <td class="shoping__cart__price">
-                $55.00
-                                    </td>
+                {item.price}
+            </td>
             <td class="shoping__cart__quantity">
                 <div class="quantity">
                     <div class="pro-qty">
-                        <input type="text" value="1" />
+                        <span class="dec qtybtn" onClick={()=>DescAmount(item.id)}>-</span>
+                        <input type="text" value={item.amount} />
+                        <span class="inc qtybtn" onClick={()=>IncAmount(item.id)}>+</span>
                     </div>
                 </div>
             </td>
             <td class="shoping__cart__total">
-                $110.00
-                                    </td>
+                {total}
+            </td>
             <td class="shoping__cart__item__close">
                 <span class="icon_close"></span>
             </td>

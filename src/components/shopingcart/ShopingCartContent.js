@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import ShopingCartItem from './ShopingCartItem';
+import { CartContext } from '../../context/CartContext';
 
 const ShopingCartContent = () => {
+    const { cartItem } = useContext(CartContext)
+
     return (
         <section class="shoping-cart spad">
             <div class="container">
@@ -19,7 +22,11 @@ const ShopingCartContent = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ShopingCartItem />
+                                    {
+                                        cartItem.map(item => {
+                                            return <ShopingCartItem item={item} />
+                                        })
+                                    }
                                 </tbody>
                             </table>
                         </div>
