@@ -1,10 +1,18 @@
-import React, { Component, useContext } from 'react'
+import React, { Component, useContext, useState, useEffect } from 'react'
 import ShopingCartItem from './ShopingCartItem';
 import { CartContext } from '../../context/CartContext';
+import ShopingTotal from './ShopingTotal';
 
 const ShopingCartContent = () => {
+    const [total,setTotal] = useState(0)
     const { cartItem } = useContext(CartContext)
-
+    useEffect(() => {
+        let temp = 0;
+        cartItem.map(item => {
+            temp = temp + item.price*item.amount;
+        })
+        setTotal(temp)
+    },[cartItem])
     return (
         <section class="shoping-cart spad">
             <div class="container">
@@ -51,16 +59,7 @@ const ShopingCartContent = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="shoping__checkout">
-                            <h5>Cart Total</h5>
-                            <ul>
-                                <li>Subtotal <span>$454.98</span></li>
-                                <li>Total <span>$454.98</span></li>
-                            </ul>
-                            <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
-                        </div>
-                    </div>
+                    <ShopingTotal total={total} />
                 </div>
             </div>
         </section>
