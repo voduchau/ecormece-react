@@ -866,7 +866,8 @@ ol {
 
 .featured__item__pic__hover {
 	position: absolute;
-	left: 0;
+	left: 25%;
+	display: flex;
 	bottom: -50px;
 	width: 100%;
 	text-align: center;
@@ -877,7 +878,7 @@ ol {
 	transition: all, 0.5s;
 }
 
-.featured__item__pic__hover li {
+.featured__item__pic__hover li{
 	list-style: none;
 	display: inline-block;
 	margin-right: 6px;
@@ -892,12 +893,12 @@ ol {
 	border-color: #7fad39;
 }
 
-.featured__item__pic__hover li:hover a i {
+.featured__item__pic__hover li:hover i {
 	color: #ffffff;
 	transform: rotate(360deg);
 }
 
-.featured__item__pic__hover li a {
+.featured__item__pic__hover li {
 	font-size: 16px;
 	color: #1c1c1c;
 	height: 40px;
@@ -915,7 +916,7 @@ ol {
 	transition: all, 0.5s;
 }
 
-.featured__item__pic__hover li a i {
+.featured__item__pic__hover li i {
 	position: relative;
 	transform: rotate(0);
 	-webkit-transition: all, 0.3s;
