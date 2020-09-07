@@ -5,10 +5,12 @@ import { CartContext } from '../../../context/CartContext';
 const FeatureItem = ({ allCate, itemft, activeTab, name, price, categories, img }) => {
     const [cate, setCate] = useState('');
     const { cartItem, AddToCart } = useContext(CartContext)
+
     const HandleAddToCart = () => {
         console.log()
         AddToCart(itemft);
     }
+
     useEffect(() => {
         const arrItem1 = itemft.cate.split(" ")
         const temp = []
@@ -21,6 +23,7 @@ const FeatureItem = ({ allCate, itemft, activeTab, name, price, categories, img 
         })
         setCate(temp.toString().replace(",", " "))
     }, [allCate])
+
     return (
         <div className={`col-lg-3 col-md-4 col-sm-6 mix ${cate}`}>
             <div className="featured__item">

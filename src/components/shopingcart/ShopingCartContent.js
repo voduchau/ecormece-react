@@ -6,6 +6,7 @@ import ShopingTotal from './ShopingTotal';
 const ShopingCartContent = () => {
     const [total,setTotal] = useState(0)
     const { cartItem } = useContext(CartContext)
+
     useEffect(() => {
         let temp = 0;
         cartItem.map(item => {
@@ -13,6 +14,7 @@ const ShopingCartContent = () => {
         })
         setTotal(temp)
     },[cartItem])
+    
     return (
         <section class="shoping-cart spad">
             <div class="container">
