@@ -9,7 +9,7 @@ const ShopingCartItem = ({ item }) => {
         setTotal(item.price * item.amount)
 
     }, [item.amount])
-  
+
     return (
         <tr>
             <td class="shoping__cart__item">
@@ -22,9 +22,9 @@ const ShopingCartItem = ({ item }) => {
             <td class="shoping__cart__quantity">
                 <div class="quantity">
                     <div class="pro-qty">
-                        <span class="dec qtybtn" onClick={()=>DescAmount(item.id)}>-</span>
+                        <span class="dec qtybtn" onClick={() => DescAmount(item.id)}>-</span>
                         <input type="text" value={item.amount} />
-                        <span class="inc qtybtn" onClick={()=>IncAmount(item.id)}>+</span>
+                        <span class="inc qtybtn" onClick={() => IncAmount(item.id)}>+</span>
                     </div>
                 </div>
             </td>
