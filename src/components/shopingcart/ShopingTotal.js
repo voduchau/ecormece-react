@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+    Link
+} from "react-router-dom";
 
 const ShopingTotal = ({ total }) => {
     return (
@@ -9,7 +12,7 @@ const ShopingTotal = ({ total }) => {
                     <li>Subtotal <span>${total}</span></li>
                     <li>Total <span>${total}</span></li>
                 </ul>
-                <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                <Link to="/checkout" class="primary-btn">PROCEED TO CHECKOUT</Link>
             </div>
         </div>
     );

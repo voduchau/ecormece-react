@@ -13,7 +13,7 @@ const ShopingCartItem = ({ item }) => {
     return (
         <tr>
             <td class="shoping__cart__item">
-                <img src="img/cart/cart-1.jpg" alt="" />
+                <img src={item.image} alt="" />
                 <h5>{item.name}</h5>
             </td>
             <td class="shoping__cart__price">

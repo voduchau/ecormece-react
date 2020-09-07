@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import HomepageScreen from './screens/homepage/HomepageScreen';
 import ShopingCartScreen from './screens/shopingCart/ShopingCartScreen';
+import CheckoutScreen from './screens/checkout/CheckoutScreen';
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,7 +17,10 @@ function App() {
           <Route path="/shoping-cart">
             <ShopingCartScreen />
           </Route>
-          <Route path="/">
+          <Route path="/checkout">
+            <CheckoutScreen />
+          </Route>
+          <Route ex path="/">
             <HomepageScreen />
           </Route>
         </Switch>
