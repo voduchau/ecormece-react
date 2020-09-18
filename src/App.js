@@ -9,6 +9,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ShopingGridScreen from './screens/shopinggrid/ShopingGridScreen';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
       <Switch>
           <Route path="/shoping-cart">
             <ShopingCartScreen />
+          </Route>
+          <Route path="/shop-grid">
+            <ShopingGridScreen />
           </Route>
           <Route path="/checkout">
             <CheckoutScreen />

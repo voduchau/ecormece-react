@@ -32,11 +32,6 @@ const Features = () => {
         })
     }
     const renderItem = () => {
-        // return item.products.filter(item => {
-        //     return item.cate.includes(activeTab)
-        // }).map(item2=>{
-        //     return <FeatureItem activeTab={activeTab} itemft={item2} />
-        // })
         return item.products.map(item1 => {
             return <FeatureItem allCate={item.categories} activeTab={activeTab} itemft={item1} />
         })
@@ -67,16 +62,6 @@ const Features = () => {
                 </div>
                 <div ref={testRef01} className="row featured__filter">
                     {renderItem()}
-                    {/* <FeatureItem activeTab={activeTab} id="10" img={feature1} categories="Vegetables 2" name="Crab Pool Security123" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="11" img={feature2} categories="Fastfood 3" name="Crab Pool Security456" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="1" img={feature1} categories="Vegetables FreshMeat" name="Crab Pool Security" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="2" img={feature2} categories="Vegetables FreshMeat" name="Crab Pool Security" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="3" img={feature3} categories="Vegetables fresh-meat" name="Crab Pool Security" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="4" img={feature4} categories="Fastfood oranges" name="Crab Pool Security" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="5" img={feature5} categories="vegetables fresh-meat" name="Crab Pool Security" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="6" img={feature6} categories="Oranges Fastfood" name="Crab Pool Security" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="7" img={feature7} categories="FreshMeat Vegetables" name="Crab Pool Security" price="$30.00" />
-                    <FeatureItem activeTab={activeTab} id="8" img={feature8} categories="Fastfood vegetables" name="Crab Pool Security" price="$30.00" /> */}
                 </div>
             </div>
         </section>
