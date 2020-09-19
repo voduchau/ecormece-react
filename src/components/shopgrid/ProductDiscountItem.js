@@ -1,6 +1,7 @@
 import React from 'react';
 import pd1 from '../../images/product/discount/pd-1.jpg'
 const ProductDiscountItem = () => {
+    console.log('oke')
     return (
         <div class="col-lg-4">
             <div class="product__discount__item">
