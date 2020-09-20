@@ -29,6 +29,22 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
+.input_slider {
+  border: 1px solid red;
+  position: relative;
+}
+#input_slider_max {
+  position: absolute;
+  left: 0;
+}
+#input_slider_min {
+  position: absolute;
+}
+.input-range {
+  border: 1px solid red !important;
+  display: flex;
+  justify-content: space-between;
+}
 
 html,
 body {
@@ -1156,7 +1172,9 @@ ol {
 
 .price-range-wrap .price-range.ui-widget-content .ui-slider-handle {
   height: 13px;
+  position: absolute;
   width: 13px;
+  border: 3px solid red !important;
   border-radius: 50%;
   background: #ffffff;
   border: none;
