@@ -1,9 +1,20 @@
-import React from 'react';
-import FeatureItem from '../homepage/features/FeatureItem';
+import React, { useContext } from 'react';
 import ProductDiscountItem from './ProductDiscountItem';
 import OwlCarousel from 'react-owl-carousel';
+import {GetItemContext} from '../../context/GetItemContext';
+
 
 const ProductDiscount = () => {
+    const {item} = useContext(GetItemContext)
+
+    const renderProducts = () => {
+        return item.products.map(item => {
+            // if(item.saleof !== 0){
+            //     return <ProductDiscountItem key={item.productID} item={item}/>
+            // }
+            return item.saleof !== 0 ? <ProductDiscountItem key={item.productID} item={item}/> : null
+        })
+    }
     return (
         <div class="product__discount">
             <div class="section-title product__discount__title">
@@ -30,8 +41,7 @@ const ProductDiscount = () => {
                         animateIn='fadeIn'
                         navText={["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"]}
                     >
-                        <ProductDiscountItem />
-                        <ProductDiscountItem />
+                        {renderProducts()}
                     </OwlCarousel>
             </div>
         </div>

@@ -1,25 +1,24 @@
 import React from 'react';
 import pd1 from '../../images/product/discount/pd-1.jpg'
-const ProductDiscountItem = () => {
-    console.log('oke')
+import GroupIconCart from '../shared/GroupIconCart';
+
+const ProductDiscountItem = ({ item }) => {
     return (
-        <div class="col-lg-4">
-            <div class="product__discount__item">
-                <div class="product__discount__item__pic set-bg"
+        <div className="col-lg-4">
+            <div className="product__discount__item">
+                <div className="product__discount__item__pic set-bg"
                     data-setbg={pd1}
-                    style={{ backgroundImage: `url(${pd1})` }}
+                    style={{ backgroundImage: `url(${item.img})` }}
                 >
-                    <div class="product__discount__percent">-20%</div>
-                    <ul class="product__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    <div className="product__discount__percent">-{item.saleof}%</div>
+                    <ul className="product__item__pic__hover">
+                        <GroupIconCart item={item} />
                     </ul>
                 </div>
-                <div class="product__discount__item__text">
+                <div className="product__discount__item__text">
                     <span>Dried Fruit</span>
-                    <h5><a href="#">Raisin’n’nuts</a></h5>
-                    <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                    <h5><a href="/#">{item.productName}</a></h5>
+                    <div className="product__item__price">${(item.price - (item.price * item.saleof) / 100)} <span>${item.price}</span></div>
                 </div>
             </div>
         </div>

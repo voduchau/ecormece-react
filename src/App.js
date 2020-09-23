@@ -6,8 +6,7 @@ import CheckoutScreen from './screens/checkout/CheckoutScreen';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import ShopingGridScreen from './screens/shopinggrid/ShopingGridScreen';
 

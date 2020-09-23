@@ -1,13 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import FeatureItem from './FeatureItem';
-import feature1 from '../../../images/featured/feature-1.jpg';
-import feature2 from '../../../images/featured/feature-2.jpg'
-import feature3 from '../../../images/featured/feature-3.jpg'
-import feature4 from '../../../images/featured/feature-4.jpg'
-import feature5 from '../../../images/featured/feature-5.jpg'
-import feature6 from '../../../images/featured/feature-6.jpg'
-import feature7 from '../../../images/featured/feature-7.jpg'
-import feature8 from '../../../images/featured/feature-8.jpg'
 import { GetItemContext } from '../../../context/GetItemContext';
 import FeatureLi from './FeatureLi';
 import mixitup from 'mixitup';
@@ -33,7 +25,7 @@ const Features = () => {
     }
     const renderItem = () => {
         return item.products.map(item1 => {
-            return <FeatureItem allCate={item.categories} activeTab={activeTab} itemft={item1} />
+            return <FeatureItem key={item1.productID} allCate={item.categories} activeTab={activeTab} itemft={item1} />
         })
     }
     useEffect(() => {

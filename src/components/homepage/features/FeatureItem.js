@@ -1,22 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './FeatureItem.css'
-import { GetItemContext } from '../../../context/GetItemContext';
-import { CartContext } from '../../../context/CartContext';
+import GroupIconCart from '../../shared/GroupIconCart';
 const FeatureItem = ({ allCate, itemft, activeTab, name, price, categories, img }) => {
     const [cate, setCate] = useState('');
-    const { cartItem, AddToCart } = useContext(CartContext)
-
-    const HandleAddToCart = () => {
-        console.log()
-        AddToCart(itemft);
-    }
 
     useEffect(() => {
         const arrItem1 = itemft.cate.split(" ")
         const temp = []
         arrItem1.map(item2 => {
             allCate.map(item3 => {
-                if (item3.cateID == item2) {
+                if (item3.cateID === item2) {
                     temp.push(item3.cateName.replace(/ +/g, ""))
                 }
             })
@@ -29,10 +22,11 @@ const FeatureItem = ({ allCate, itemft, activeTab, name, price, categories, img 
             <div className="featured__item">
                 <div className="featured__item__pic set-bg" data-setbg={img} style={{ backgroundImage: `url(${itemft.img})` }}>
                     <ul className="featured__item__pic__hover">
-                        <li><a href=""><i className="fa fa-heart"></i></a></li>
+                        {/* <li><a href=""><i className="fa fa-heart"></i></a></li>
                         <li><a href=""><i className="fa fa-retweet"></i></a></li>
-                        <li><a><i onClick={() => HandleAddToCart()} className="fa fa-shopping-cart"></i></a></li>
-                    </ul>
+                        <li><a><i onClick={() => HandleAddToCart()} className="fa fa-shopping-cart"></i></a></li> */}
+                        <GroupIconCart item={itemft}/>
+                    </ul> 
                 </div>
                 <div className="featured__item__text">
                     <h6><a href="/#">{itemft.productName}</a></h6>

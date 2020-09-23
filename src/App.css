@@ -29,6 +29,24 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
+#range-slider-h3 {
+  font-weight: bold !important;
+  font-size: 26px;
+  color: black;
+}
+.range-slider-max {
+  margin-left: 10px;
+}
+.range-slider-min {
+  margin-right: 10px;
+}
+.price_range .range-slider {
+  display: flex;
+  color: red;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
 .input_slider {
   border: 1px solid red;
   position: relative;

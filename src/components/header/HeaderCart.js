@@ -1,11 +1,6 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 const HeaderCart = () => {
     const { cartItem } = useContext(CartContext);
     return (

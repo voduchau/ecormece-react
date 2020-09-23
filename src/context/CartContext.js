@@ -1,5 +1,4 @@
-import React, { createContext, useReducer, useEffect, useState } from 'react';
-import firebaseApp from '../firebase/firebaseApp';
+import React, { createContext, useEffect, useState } from 'react';
 export const CartContext = createContext();
 
 const CartProvider = (props) => {
@@ -13,7 +12,7 @@ const CartProvider = (props) => {
 
     const AddToCart = (itemNew) => {
         const idItem = cartItem.findIndex(item => item.id === itemNew.productID);
-        if (idItem != -1) {
+        if (idItem !== -1) {
             const temp = cartItem;
             temp[idItem].amount +=1
             setCartItem(temp)

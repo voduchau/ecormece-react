@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Header from '../../components/header/Header';
 import HeroCategory from '../../components/homepage/hero/HeroCategory';
 import HeroSearch from '../../components/homepage/hero/HeroSearch';
