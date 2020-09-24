@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GetItemContext } from '../../context/GetItemContext';
 import ProductFilterItem from './ProductFilterItem';
 
 const ProductFilter = () => {
-    const {item,GetAllProducts} = useContext(GetItemContext)
+    const {item,GetAllProducts, FilterItem} = useContext(GetItemContext)
+    const [products, setProducts] = useState([])
 
     const renderItem = () => {
-        return item.products.map(item1 => {
-            return <ProductFilterItem key={item1.productID} item={item1} />
+        return item.filterProducts && item.filterProducts.map(item1 => {
+            if(!item1.saleof){
+                return <ProductFilterItem key={item1.productID} item={item1} />
+            }
         })
     }
     useEffect(()=>{

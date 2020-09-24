@@ -1,6 +1,15 @@
-import React from 'react';
+import React,{useContext,useState} from 'react';
+import { useEffect } from 'react';
+import {GetItemContext} from '../../context/GetItemContext';
 
 const FilterItem = () => {
+    const {item} = useContext(GetItemContext)
+    const [amount, setAmount ] = useState(0)
+    useEffect(()=>{
+        if(item.filterProducts){
+            setAmount(item.filterProducts.length)
+        }
+    },[item.filterProducts])
     return (
         <div class="filter__item">
             <div class="row">
@@ -15,7 +24,7 @@ const FilterItem = () => {
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="filter__found">
-                        <h6><span>16</span> Products found</h6>
+                    <h6><span>{amount}</span> Products found</h6>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-3">

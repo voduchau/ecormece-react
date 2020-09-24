@@ -30,14 +30,13 @@ const reducer = (state, action) => {
 const GetItemProvider = (props) => {
     const [item, dispatch] = useReducer(reducer, initItem);
 
-    const FilterItem = async (value) => {
+    const FilterItem = (value) => {
         let temp = []
         item.products.map(item1=>{
             if(value[0] <= item1.price && item1.price <= value[1]){
                 temp.push(item1)
             }
         })
-        console.log(temp,'temp')
         dispatch({
             type: "FILTER_PRICE",
             payload: temp

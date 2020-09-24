@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { GetItemContext } from '../../context/GetItemContext';
+import { useEffect } from 'react';
 
 
 const marks = [
@@ -16,13 +17,15 @@ const marks = [
   ];
 const SidebarPrice = () => {
     const {item, FilterItem} = useContext(GetItemContext)
-    const [value, setValue] = useState([10, 30]);
+    const [value, setValue] = useState([10, 60]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
         FilterItem(value);
-        console.log(item,'this item')
     };
+    useEffect(()=>{
+        FilterItem(value);
+    },[item.products])
     return (
         <div className="price_range">
             <Typography id="range-slider" gutterBottom>
