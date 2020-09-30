@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './FeatureItem.css'
 import GroupIconCart from '../../shared/GroupIconCart';
+import { v4 as uuidv4 } from 'uuid';
+import { Link } from "react-router-dom";
+
 const FeatureItem = ({ allCate, itemft, activeTab, name, price, categories, img }) => {
     const [cate, setCate] = useState('');
 
@@ -22,14 +25,17 @@ const FeatureItem = ({ allCate, itemft, activeTab, name, price, categories, img 
             <div className="featured__item">
                 <div className="featured__item__pic set-bg" data-setbg={img} style={{ backgroundImage: `url(${itemft.img})` }}>
                     <ul className="featured__item__pic__hover">
-                        {/* <li><a href=""><i className="fa fa-heart"></i></a></li>
-                        <li><a href=""><i className="fa fa-retweet"></i></a></li>
-                        <li><a><i onClick={() => HandleAddToCart()} className="fa fa-shopping-cart"></i></a></li> */}
-                        <GroupIconCart item={itemft}/>
-                    </ul> 
+                        <GroupIconCart item={itemft} />
+                    </ul>
                 </div>
                 <div className="featured__item__text">
-                    <h6><a href="/#">{itemft.productName}</a></h6>
+                    <h6><Link to={{
+                        pathname: `/shop-detail/${itemft.productID}`,
+                        // search: "?sort=name",
+                        // hash: "#the-hash",
+                        key: uuidv4(),
+                        state: { item: itemft }
+                    }}>{itemft.productName}</Link></h6>
                     <h5>{`$${itemft.price}.00`}</h5>
                 </div>
             </div>

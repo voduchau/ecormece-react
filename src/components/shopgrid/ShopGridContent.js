@@ -6,19 +6,19 @@ import Sidebar from './Sidebar';
 
 const ShopGridContent = () => {
     return (
-        <section class="product spad">
-            <div class="container">
-                <div class="row">
+        <section className="product spad">
+            <div className="container">
+                <div className="row">
                     <Sidebar />
-                    <div class="col-lg-9 col-md-7">
+                    <div className="col-lg-9 col-md-7">
                         <ProductDiscount />
                         <FilterItem />
                         <ProductFilter />
-                        <div class="product__pagination">
+                        <div className="product__pagination">
                             <a href="/#">1</a>
                             <a href="/#">2</a>
                             <a href="/#">3</a>
-                            <a href="/#"><i class="fa fa-long-arrow-right"></i></a>
+                            <a href="/#"><i className="fa fa-long-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
