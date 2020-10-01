@@ -29,6 +29,29 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
+.body-modal-login {
+  position: absolute;
+  width: 400px;
+  border: 1px solid #000;
+  background: #fff;
+}
+.popover-wraper {
+  margin-left: 10px;
+}
+.content-popover {
+  
+}
+.popover-content {
+}
+.popover-login {
+  pointer-events: none;
+}
+.btn-login {
+  color: white !important;
+  background-color: #7fad39 !important;
+  border: 1px solid white !important;
+  margin-bottom: 7px !important;
+}
 .alertCart {
   min-height: 0px;
   width: 356px;
@@ -554,7 +577,7 @@ ol {
 
 .header__cart ul {
   display: inline-block;
-  margin-right: 25px;
+  margin-right: 0px;
 }
 
 .header__cart ul li {

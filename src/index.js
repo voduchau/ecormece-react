@@ -5,14 +5,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import GetItemProvider from './context/GetItemContext';
 import CartProvider from './context/CartContext';
+import AuthProvider from './context/AuthContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GetItemProvider>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </GetItemProvider>
+    <AuthProvider>
+      <GetItemProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </GetItemProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

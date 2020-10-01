@@ -24,7 +24,12 @@ const SidebarPrice = () => {
         FilterItem(value);
     };
     useEffect(()=>{
-        FilterItem(value,history.location.state.searchText);
+        if(history.location.state){
+            FilterItem(value,history.location.state.searchText);
+        }
+        else {
+            FilterItem(value);
+        }
     },[])
     return (
         <div className="price_range">
