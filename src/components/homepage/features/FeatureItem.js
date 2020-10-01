@@ -12,7 +12,7 @@ const FeatureItem = ({ allCate, itemft, activeTab, name, price, categories, img 
         const temp = []
         arrItem1.map(item2 => {
             allCate.map(item3 => {
-                if (item3.cateID === item2) {
+                if (item3.cateID == item2) {
                     temp.push(item3.cateName.replace(/ +/g, ""))
                 }
             })

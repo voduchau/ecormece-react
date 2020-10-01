@@ -15,9 +15,7 @@ const ProductDiscount = () => {
     const [isMounted,setIsMounted] = useState(false)
 
     const renderProducts = () => {
-        console.log(item,'item12')
         return item.products.map(item => {
-            console.log(item,'xx')
             return item.saleof !== 0 ? <ProductDiscountItem Link={Link} key={item.productID} item={item}/> : null
         })
     }

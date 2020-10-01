@@ -1,30 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CategoryItem from './CategoryItem';
 import OwlCarousel from 'react-owl-carousel';
 import { GetItemContext } from '../../../context/GetItemContext';
 
 const Categories = () => {
-    // const [imgCate, setImg] = useState([])
+    const [imgCate, setImg] = useState([])
     const { item } = useContext(GetItemContext);
-    // const [isMounted, setIsMounted] = useState(false);
+    // const [isMounted,setIsMounted] = useState(false)
 
     const renderView = () => {
         return item.categories.map(item => {
             return <CategoryItem key={item.cateID} image={item.img} categoryName={item.cateName} />
         })
     }
-    // useEffect(() => {
-    //     if (item.categories.length !== 0) {
-    //         setImg(item.categories)
-    //         setIsMounted(true)
-    //     }
-    // }, [item.categories])
+    useEffect(() => {
+        if (item.categories.length !== 0) {
+            setImg(item.categories)
+            // setIsMounted(true)
+        }
+        // // setIsMounted(true)
+    }, [item.categories])
+
     return (
         <section className="categories">
-            {
                 <div className="container">
                     <div className="row">
-                        <OwlCarousel
+                            <OwlCarousel
                             className="owl-theme"
                             loop
                             margin={20}
@@ -48,7 +49,6 @@ const Categories = () => {
                         </OwlCarousel>
                     </div>
                 </div>
-            }
         </section>
     )
 }
