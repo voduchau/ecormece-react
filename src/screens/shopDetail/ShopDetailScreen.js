@@ -5,8 +5,15 @@ import HeroSearch from '../../components/homepage/hero/HeroSearch';
 import BreadCrumb from '../../components/shopingcart/BreadCrumb';
 import ShopDetailContent from '../../components/shopdetail/ShopDetailContent';
 import Footer from '../../components/footer/Footer';
+import { useLocation } from "react-router-dom";
 
 const ShopDetailScreen = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 200);
+      }, [pathname]);
+
     return ( 
         <>
             <Header />

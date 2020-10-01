@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import firebaseApp from '../firebase/firebaseApp';
-// import uid from "uid";
+
+
 export const GetItemContext = createContext();
 
 const initItem = {
@@ -30,17 +31,33 @@ const reducer = (state, action) => {
 const GetItemProvider = (props) => {
     const [item, dispatch] = useReducer(reducer, initItem);
 
-    const FilterItem = (value) => {
-        let temp = []
-        item.products.map(item1=>{
-            if(value[0] <= item1.price && item1.price <= value[1]){
-                temp.push(item1)
-            }
-        })
-        dispatch({
-            type: "FILTER_PRICE",
-            payload: temp
-        })
+    const FilterItem = (value, ...param) => {
+        // console.log('run')
+        if (param[0]) {
+            let temp = []
+            item.products.map(item1 => {
+                if (item1.productName.toLowerCase().includes(param[0].toLowerCase())) {
+                    console.log('xx')
+                    temp.push(item1)
+                }
+            })
+            dispatch({
+                type: "FILTER_PRICE",
+                payload: temp
+            })
+        }
+        else {
+            let temp = []
+            item.products.map(item1 => {
+                if (value[0] <= item1.price && item1.price <= value[1]) {
+                    temp.push(item1)
+                }
+            })
+            dispatch({
+                type: "FILTER_PRICE",
+                payload: temp
+            })
+        }
     }
     const GetAllProducts = () => {
         firebaseApp.database().ref("products/").on("value", async (snapshot) => {

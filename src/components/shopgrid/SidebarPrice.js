@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { GetItemContext } from '../../context/GetItemContext';
 import { useEffect } from 'react';
-
+import { useParams, useLocation, useHistory } from "react-router-dom";
 
 const marks = [
     {
@@ -17,15 +17,15 @@ const marks = [
   ];
 const SidebarPrice = () => {
     const {item, FilterItem} = useContext(GetItemContext)
-    const [value, setValue] = useState([10, 60]);
-
+    const [value, setValue] = useState([0, 100]);
+    let history = useHistory();
     const handleChange = (event, newValue) => {
         setValue(newValue);
         FilterItem(value);
     };
     useEffect(()=>{
-        FilterItem(value);
-    },[item.products])
+        FilterItem(value,history.location.state.searchText);
+    },[])
     return (
         <div className="price_range">
             <Typography id="range-slider" gutterBottom>
