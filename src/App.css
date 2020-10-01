@@ -29,6 +29,18 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
+.alertCart {
+  min-height: 0px;
+  width: 356px;
+  margin-left: 66px;
+  margin-bottom: 19px;
+  margin-top: -18px;
+}
+.button-cart {
+  background: #7fad39 !important;
+  height: 48px;
+  margin-bottom: 5px !important;
+}
 .product__discount__item__text h6 a {
   color: black
 }

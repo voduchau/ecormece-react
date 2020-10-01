@@ -4,7 +4,12 @@ import { useParams, useLocation, useHistory } from "react-router-dom";
 import ImageDetails from './ImageDetails';
 import ProductDetailTab from './ProductDetailTab';
 import ProductRating from './ProductRating';
-import {CartContext} from '../../context/CartContext';
+import { CartContext } from '../../context/CartContext';
+import Button from '@material-ui/core/Button';
+import Alert from '@material-ui/lab/Alert';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const ShopDetailContent = (props) => {
     const { AddToCart } = useContext(CartContext);
@@ -13,20 +18,30 @@ const ShopDetailContent = (props) => {
     let history = useHistory();
     let params = useParams()
 
+
+    // const handleClick = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
+
+    const handleClose = () => {
+        setIsActive({ ...state, open: false });
+    };
+
     const handleChangeTab = (tab) => {
         let temp = [false, false, false];
         temp[tab] = true;
         setIsActive(temp)
     }
-    const handleAddToCart = () => {
+    const handleAddToCart = (newState) => {
         AddToCart(state.item)
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     useEffect(() => {
         if (!state) {
             history.push('');
         }
     }, [state])
+
     return (
         <section className="product-details spad">
             <div className="container">
@@ -47,7 +62,10 @@ const ShopDetailContent = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <a onClick={()=> handleAddToCart()} className="primary-btn">ADD TO CARD</a>
+                            <Button className="button-cart" variant="contained" color="primary" onClick={() => handleAddToCart()}>
+                                ADD TO CART
+                            </Button>
+                            
                             <a href="/#" className="heart-icon"><i className="fa fa-heart" aria-hidden="true"></i></a>
                             <ul>
                                 <li><b>Availability</b> <span>In Stock</span></li>
