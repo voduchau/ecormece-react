@@ -115,11 +115,13 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
         }
         else {
             const rs = await handleLogin(email, password)
+            // setPopover(null)
             if (rs) {
-                setOpenBackdrop(false)
-                handleCloseLoginMd()
+                // setPopover(null)
                 setPopover(null)
+                handleCloseLoginMd()
                 handleClickSnackBar()
+                setOpenBackdrop(false)
             }
         }
 

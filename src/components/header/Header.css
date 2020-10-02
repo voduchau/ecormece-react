@@ -1,0 +1,16 @@
+.btn-profile {
+    color: black !important;
+}
+.avatar-user {
+    align-self: center;
+    margin-left: 33%;
+    margin-bottom: 10px;
+}
+.list-profile {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+.menu-setting {
+    /* border: 3px solid red; */
+}
