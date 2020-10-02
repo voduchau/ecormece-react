@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import './GroupAuths.css'
 import Modal from '@material-ui/core/Modal';
 import Login from './Login';
+import ModalLogin from './ModalLogin';
+import ModalRegister from './ModalRegister';
 
 
 function getModalStyle() {
@@ -16,18 +18,23 @@ function getModalStyle() {
     };
 }
 
-const GroupAuths = ({ handleClosePopover }) => {
+const GroupAuths = () => {
 
     const [modalStyle] = useState(getModalStyle);
-    const [open, setOpen] = useState(false);
+    const [openLogin, setOpenLogin] = useState(false);
+    const [openRegister, setOpenRegister] = useState(false);
 
     const handleClickLogin = () => {
-        setOpen(true)
-        // handleClosePopover(null)
+        setOpenLogin(true)
     }
-    const handleClose = () => {
-        console.log('close handle')
-        setOpen(false);
+    const handleCloseLogin = () => {
+        setOpenLogin(false);
+    };
+    const handleClickRegister = () => {
+        setOpenRegister(true)
+    }
+    const handleCloseRegister = () => {
+        setOpenRegister(false);
     };
     return (
         <div className="group-auths">
@@ -45,6 +52,7 @@ const GroupAuths = ({ handleClosePopover }) => {
                 className="group-auths-btn btn-register"
                 color="primary"
                 disableElevation
+                onClick={handleClickRegister}
             >
                 Register
             </Button>
@@ -56,34 +64,8 @@ const GroupAuths = ({ handleClosePopover }) => {
             >
                 Login Facebook
             </Button>
-
-            {/* modal login */}
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                // disableEnforceFocus
-            >
-                <div style={modalStyle} className="body-modal-login">
-                    <Login />
-                </div>
-            </Modal>
-            {/* end */}
-
-            {/* modal register */}
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                // disableEnforceFocus
-            >
-                <div style={modalStyle} className="body-modal-login">
-                    <Login />
-                </div>
-            </Modal>
-            {/* end */}
+            <ModalLogin openLogin={openLogin} handleCloseLogin={handleCloseLogin}  />
+            <ModalRegister openRegister={openRegister} handleCloseRegister={handleCloseRegister} />
         </div>
     );
 }
