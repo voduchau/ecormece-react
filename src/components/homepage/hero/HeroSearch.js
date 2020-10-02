@@ -17,7 +17,7 @@ const HeroSearch = () => {
             search: `?search=${searchText}`,
             state: { searchText: searchText }
         })
-        // FilterItem([0, 100], searchText)
+        FilterItem([0, 100], searchText)
     }
     return (
         <div className="hero__search">
