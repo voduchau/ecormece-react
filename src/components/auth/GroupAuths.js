@@ -18,7 +18,7 @@ import ModalRegister from './ModalRegister';
 //     };
 // }
 
-const GroupAuths = ({setPopover}) => {
+const GroupAuths = ({setPopover, handleClickSnackBar}) => {
 
     // const [modalStyle] = useState(getModalStyle);
     const [openLogin, setOpenLogin] = useState(false);
@@ -64,7 +64,7 @@ const GroupAuths = ({setPopover}) => {
             >
                 Login Facebook
             </Button>
-            <ModalLogin setPopover={setPopover} openLogin={openLogin} handleCloseLogin={handleCloseLogin}  />
+            <ModalLogin handleClickSnackBar={handleClickSnackBar} setPopover={setPopover} openLogin={openLogin} handleCloseLogin={handleCloseLogin}  />
             <ModalRegister setPopover={setPopover} openRegister={openRegister} handleCloseRegister={handleCloseRegister} />
         </div>
     );

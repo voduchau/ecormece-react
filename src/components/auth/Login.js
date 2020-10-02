@@ -11,13 +11,20 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Alert from '@material-ui/lab/Alert';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
+import Alert from '@material-ui/lab/Alert';
 import { AuthContext } from '../../context/AuthContext';
+import './Login.css';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+    },
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -41,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Login = ({ setPopover, handleCloseLoginMd }) => {
+const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
     const classes = useStyles();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -49,7 +56,6 @@ const Login = ({ setPopover, handleCloseLoginMd }) => {
     const [errPassword, setErrPassword] = useState('');
     const { handleLogin, errLogin } = useContext(AuthContext)
     const [openBackdrop, setOpenBackdrop] = useState(false);
-
 
     useEffect(() => {
         if (errLogin) {
@@ -88,7 +94,7 @@ const Login = ({ setPopover, handleCloseLoginMd }) => {
     // validate password
     const handleBlurPassword = () => {
         setErrPassword('')
-        if(!password){
+        if (!password) {
             return setErrPassword("Password can't empty")
         }
         if (password.length < 6) {
@@ -113,6 +119,7 @@ const Login = ({ setPopover, handleCloseLoginMd }) => {
                 setOpenBackdrop(false)
                 handleCloseLoginMd()
                 setPopover(null)
+                handleClickSnackBar()
             }
         }
 

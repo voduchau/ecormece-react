@@ -14,7 +14,7 @@ function getModalStyle() {
     };
 }
 
-const ModalLogin = ({ setPopover, openLogin, handleCloseLogin }) => {
+const ModalLogin = ({ handleClickSnackBar, setPopover, openLogin, handleCloseLogin }) => {
     const [modalStyle] = useState(getModalStyle);
     return (
         <Modal
@@ -25,7 +25,7 @@ const ModalLogin = ({ setPopover, openLogin, handleCloseLogin }) => {
         // disableEnforceFocus
         >
             <div style={modalStyle} className="body-modal-login">
-                <Login setPopover={setPopover} handleCloseLoginMd={handleCloseLogin} />
+                <Login handleClickSnackBar={handleClickSnackBar} setPopover={setPopover} handleCloseLoginMd={handleCloseLogin} />
             </div>
         </Modal>
     );
