@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Register = ({handleCloseRegisterMd}) => {
+const Register = ({ setPopover, handleCloseRegisterMd }) => {
     const classes = useStyles();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -49,20 +49,21 @@ const Register = ({handleCloseRegisterMd}) => {
     const { handleRegister, errRegister, setErrRegister } = useContext(AuthContext)
     const [errEmail, setErrEmail] = useState('');
     const [errPassword, setErrPassword] = useState('');
+    const [confPassword, setConfPassword] = useState('')
     const [openBackdrop, setOpenBackdrop] = useState(false);
     let history = useHistory();
-    
 
-    useEffect(()=>{
-        if(errRegister){
+
+    useEffect(() => {
+        if (errRegister) {
             setOpenBackdrop(false)
         }
         else {
             // setOpenBackdrop(true)
         }
-        return ()=>{
+        return () => {
         }
-    },[errRegister])
+    }, [errRegister])
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value)
@@ -94,8 +95,19 @@ const Register = ({handleCloseRegisterMd}) => {
     // validate password
     const handleBlurPassword = () => {
         setErrPassword('')
+        if(!password){
+            return setErrPassword("Password can't empty")
+        }
         if (password.length < 6) {
             return setErrPassword('Password should be at least 6 characters!')
+        }
+    }
+
+    // validate confirm password
+    const handleBlurConfirmPassword = () => {
+        setConfPassword('');
+        if(password !== confirmPassword || !confirmPassword){
+            setConfPassword('rePassword incorrect')
         }
     }
 
@@ -109,12 +121,12 @@ const Register = ({handleCloseRegisterMd}) => {
         }
         else {
             const rs = await handleRegister(email, password)
-            if(rs){
+            if (rs) {
                 setOpenBackdrop(false)
                 handleCloseRegisterMd()
+                setPopover(null)
             }
         }
-       
     }
 
     const handleCloseBackdrop = () => {
@@ -174,6 +186,8 @@ const Register = ({handleCloseRegisterMd}) => {
                         onChange={(e) => handleChangePassword(e)}
                     />
                     <TextField
+                        error={confPassword ? true : false}
+                        helperText={confPassword}
                         variant="outlined"
                         margin="normal"
                         required
@@ -184,6 +198,7 @@ const Register = ({handleCloseRegisterMd}) => {
                         id="ConfirmPassword"
                         autoComplete="current-password"
                         value={confirmPassword}
+                        onBlur={()=>handleBlurConfirmPassword()}
                         onChange={(e) => handleChangeConfirmPassword(e)}
                     />
                     {/* <FormControlLabel

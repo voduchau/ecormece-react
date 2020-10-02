@@ -11,10 +11,10 @@ const FilterItem = () => {
         }
     },[item.filterProducts])
     return (
-        <div class="filter__item">
-            <div class="row">
-                <div class="col-lg-4 col-md-5">
-                    <div class="filter__sort">
+        <div className="filter__item">
+            <div className="row">
+                <div className="col-lg-4 col-md-5">
+                    <div className="filter__sort">
                         <span>Sort By</span>
                         <select>
                             <option value="0">Default</option>
@@ -22,15 +22,15 @@ const FilterItem = () => {
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="filter__found">
+                <div className="col-lg-4 col-md-4">
+                    <div className="filter__found">
                     <h6><span>{amount}</span> Products found</h6>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-3">
-                    <div class="filter__option">
-                        <span class="icon_grid-2x2"></span>
-                        <span class="icon_ul"></span>
+                <div className="col-lg-4 col-md-3">
+                    <div className="filter__option">
+                        <span className="icon_grid-2x2"></span>
+                        <span className="icon_ul"></span>
                     </div>
                 </div>
             </div>

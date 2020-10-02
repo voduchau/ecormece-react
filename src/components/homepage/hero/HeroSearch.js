@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useParams, useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { GetItemContext } from '../../../context/GetItemContext';
 
 const HeroSearch = () => {

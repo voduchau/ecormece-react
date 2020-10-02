@@ -11,10 +11,15 @@ const AuthProvider = (props) => {
 
     const handleLogin = async (email, password) => {
         setErrLogin('')
-        await firebaseApp.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+        return await firebaseApp.auth().signInWithEmailAndPassword(email, password)
+        .then(()=>{
+            console.log('login success')
+            return 1
+        })
+        .catch(function (error) {
             setErrLogin(error.message)
-            // var errorCode = error.code;
-            // var errorMessage = error.message;
+            console.log('error when login')
+            return 0
         });
     }
 

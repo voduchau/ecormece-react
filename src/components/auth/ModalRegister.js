@@ -13,7 +13,7 @@ function getModalStyle() {
     };
 }
 
-const ModalRegister = ({ openRegister, handleCloseRegister }) => {
+const ModalRegister = ({ setPopover, openRegister, handleCloseRegister }) => {
     const [modalStyle] = useState(getModalStyle);
     return (
         <Modal
@@ -24,7 +24,7 @@ const ModalRegister = ({ openRegister, handleCloseRegister }) => {
             disableEnforceFocus
         >
             <div style={modalStyle} className="body-modal-login">
-                <Register handleCloseRegisterMd={handleCloseRegister}/>
+                <Register setPopover={setPopover} handleCloseRegisterMd={handleCloseRegister}/>
             </div>
         </Modal>
     );

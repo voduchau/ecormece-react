@@ -9,7 +9,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import PersonIcon from '@material-ui/icons/Person';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
-import Login from '../auth/Login';
+// import Login from '../auth/Login';
 import GroupAuths from '../auth/GroupAuths';
 
 const HeaderCart = () => {
@@ -57,6 +57,7 @@ const HeaderCart = () => {
                                 open={open}
                                 anchorEl={anchorEl}
                                 onClose={handleClose}
+                                // onMouseLeave={handleClose}
                                 anchorOrigin={{
                                     vertical: "bottom",
                                     horizontal: "center"
@@ -67,7 +68,7 @@ const HeaderCart = () => {
                                 }}
                             >
                                 <Typography className="popover-content">
-                                    <GroupAuths handleClosePopover={handleClose} />
+                                    <GroupAuths setPopover={setAnchorEl} handleClosePopover={handleClose} />
                                 </Typography>
                             </Popover>
                         </div>
