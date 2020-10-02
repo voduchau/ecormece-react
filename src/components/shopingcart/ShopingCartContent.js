@@ -1,4 +1,4 @@
-import React, { Component, useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import ShopingCartItem from './ShopingCartItem';
 import { CartContext } from '../../context/CartContext';
 import ShopingTotal from './ShopingTotal';
@@ -9,9 +9,9 @@ const ShopingCartContent = () => {
 
     useEffect(() => {
         let temp = 0;
-        cartItem.map(item => {
-            temp = temp + item.price*item.amount;
-        })
+        cartItem.map(item => (
+            temp = temp + item.price*item.amount
+        ))
         setTotal(temp)
     },[cartItem])
     
@@ -45,8 +45,8 @@ const ShopingCartContent = () => {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="shoping__cart__btns">
-                            <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                            <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                            <a href="/#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                            <a href="/#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             Upadate Cart</a>
                         </div>
                     </div>

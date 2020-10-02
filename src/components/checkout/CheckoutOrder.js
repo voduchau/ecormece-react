@@ -5,7 +5,7 @@ import CheckoutOrderProducts from './CheckoutOrderProducts';
 
 const CheckoutOrder = () => {
     const { cartItem } = useContext(CartContext)
-    useEffect(() => {
+    useEffect(() => {   
 
     },[])
 

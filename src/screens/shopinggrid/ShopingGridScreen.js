@@ -2,10 +2,9 @@ import React from 'react'
 import Header from '../../components/header/Header';
 import HeroCategory from '../../components/homepage/hero/HeroCategory';
 import HeroSearch from '../../components/homepage/hero/HeroSearch';
+import ShopGridContent from '../../components/shopgrid/ShopGridContent';
 import BreadCrumb from '../../components/shopingcart/BreadCrumb';
-import ShopingCartContent from '../../components/shopingcart/ShopingCartContent';
-
-const ShopingCartScreen = () => {
+const ShopingGridScreen = () => {
     return (
         <>
             <Header />
@@ -20,9 +19,9 @@ const ShopingCartScreen = () => {
                 </div>
             </section>
             <BreadCrumb />
-            <ShopingCartContent />
+            <ShopGridContent />
         </>
     );
 }
 
-export default ShopingCartScreen;
+export default ShopingGridScreen;

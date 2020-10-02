@@ -1,5 +1,4 @@
 import React from 'react';
-import cat4 from '../../../images/categories/cat-4.jpg';
 
 const CategoryItem = ({ item, categoryName, image }) => {
     return (

@@ -1,19 +1,22 @@
-import React, { createContext, useReducer, useEffect, useState } from 'react';
-import firebaseApp from '../firebase/firebaseApp';
+import React, { createContext, useEffect, useState } from 'react';
 export const CartContext = createContext();
 
 const CartProvider = (props) => {
     const [cartItem, setCartItem] = useState([]);
-
+    const [ShowAlert,setShowAlert] = useState(false)
     useEffect(() => {
         if(localStorage.getItem("cartItem") != null){
             setCartItem(JSON.parse(localStorage.getItem("cartItem")))
         }
     },[])
 
+    const CloseAlert = () => {
+        setShowAlert(false)
+    }
     const AddToCart = (itemNew) => {
+        setShowAlert(true)
         const idItem = cartItem.findIndex(item => item.id === itemNew.productID);
-        if (idItem != -1) {
+        if (idItem !== -1) {
             const temp = cartItem;
             temp[idItem].amount +=1
             setCartItem(temp)
@@ -44,7 +47,7 @@ const CartProvider = (props) => {
         setCartItem(temp)
     }
     return (
-        <CartContext.Provider value={{ cartItem, AddToCart,DescAmount, IncAmount  }}>
+        <CartContext.Provider value={{ CloseAlert,ShowAlert, cartItem, AddToCart,DescAmount, IncAmount  }}>
             {props.children}
         </CartContext.Provider>
     )

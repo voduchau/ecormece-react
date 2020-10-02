@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import Header from '../../components/header/Header';
 import HeroCategory from '../../components/homepage/hero/HeroCategory';
 import HeroSearch from '../../components/homepage/hero/HeroSearch';
 import BreadCrumb from '../../components/shopingcart/BreadCrumb';
-import ShopingCartContent from '../../components/shopingcart/ShopingCartContent';
+import ShopDetailContent from '../../components/shopdetail/ShopDetailContent';
+import Footer from '../../components/footer/Footer';
+import { useLocation } from "react-router-dom";
 
-const ShopingCartScreen = () => {
-    return (
+const ShopDetailScreen = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 200);
+      }, [pathname]);
+
+    return ( 
         <>
             <Header />
             <section className="hero hero-normal">
@@ -20,9 +28,10 @@ const ShopingCartScreen = () => {
                 </div>
             </section>
             <BreadCrumb />
-            <ShopingCartContent />
+            <ShopDetailContent />
+            <Footer />
         </>
-    );
+     );
 }
-
-export default ShopingCartScreen;
+ 
+export default ShopDetailScreen;

@@ -1,12 +1,14 @@
 import React from 'react';
-
+import {
+    Link
+  } from "react-router-dom";
 const HeaderMenu = () => {
     return (
             <div className="col-lg-6">
                 <nav className="header__menu">
                     <ul>
-                        <li className="active"><a href="./index.html">Home</a></li>
-                        <li><a href="./shop-grid.html">Shop</a></li>
+                        <li className="active"><Link to="/">Home</Link></li>
+                        <li><Link to="/shop-grid">Shop</Link></li>
                         <li><a href="/#">Pages</a>
                             <ul className="header__menu__dropdown">
                                 <li><a href="./shop-details.html">Shop Details</a></li>
