@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../components/header/Header';
 import HeroCategory from '../../components/homepage/hero/HeroCategory';
 import HeroSearch from '../../components/homepage/hero/HeroSearch'
-import BreadCrumb from '../../components/shopingcart/BreadCrumb';
+import BreadCrumb from '../../components/shared/BreadCrumb';
 import CheckoutContent from '../../components/checkout/CheckoutContent';
 
 const CheckoutScreen = () => {
@@ -19,7 +19,7 @@ const CheckoutScreen = () => {
                     </div>
                 </div>
             </section>
-            <BreadCrumb />
+            <BreadCrumb title="Checkout" />
             <CheckoutContent />
         </>
     );
