@@ -3,7 +3,8 @@ import Header from '../../components/header/Header';
 import HeroCategory from '../../components/homepage/hero/HeroCategory';
 import HeroSearch from '../../components/homepage/hero/HeroSearch';
 import ShopGridContent from '../../components/shopgrid/ShopGridContent';
-import BreadCrumb from '../../components/shopingcart/BreadCrumb';
+import BreadCrumb from '../../components/shared/BreadCrumb';
+
 const ShopingGridScreen = () => {
     return (
         <>
@@ -18,7 +19,7 @@ const ShopingGridScreen = () => {
                     </div>
                 </div>
             </section>
-            <BreadCrumb />
+            <BreadCrumb title="shop" />
             <ShopGridContent />
         </>
     );
