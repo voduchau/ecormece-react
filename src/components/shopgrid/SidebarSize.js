@@ -5,27 +5,27 @@ const SidebarSize = () => {
         <div className="sidebar__item">
             <h4>Popular Size</h4>
             <div className="sidebar__item__size">
-                <label for="large">
+                <label>
                     Large
-                                    <input type="radio" id="large" />
+                    <input type="radio" id="large" />
                 </label>
             </div>
             <div className="sidebar__item__size">
-                <label for="medium">
+                <label>
                     Medium
-                                    <input type="radio" id="medium" />
+                    <input type="radio" id="medium" />
                 </label>
             </div>
             <div className="sidebar__item__size">
-                <label for="small">
+                <label>
                     Small
-                                    <input type="radio" id="small" />
+                    <input type="radio" id="small" />
                 </label>
             </div>
             <div className="sidebar__item__size">
-                <label for="tiny">
+                <label>
                     Tiny
-                                    <input type="radio" id="tiny" />
+                    <input type="radio" id="tiny" />
                 </label>
             </div>
         </div>

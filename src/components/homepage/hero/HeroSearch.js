@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useParams, useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { GetItemContext } from '../../../context/GetItemContext';
 
 const HeroSearch = () => {
@@ -17,7 +17,7 @@ const HeroSearch = () => {
             search: `?search=${searchText}`,
             state: { searchText: searchText }
         })
-        // FilterItem([0, 100], searchText)
+        FilterItem([0, 100], searchText)
     }
     return (
         <div className="hero__search">

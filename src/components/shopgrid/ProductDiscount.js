@@ -24,11 +24,11 @@ const ProductDiscount = () => {
     },[])
     return !isMounted ? null :
     (
-        <div class="product__discount">
-        <div class="section-title product__discount__title">
+        <div className="product__discount">
+        <div className="section-title product__discount__title">
             <h2>Sale Off</h2>
         </div>
-        <div class="row">
+        <div className="row">
                 <OwlCarousel
                     className="owl-theme"
                     loop

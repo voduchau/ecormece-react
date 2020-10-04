@@ -3,28 +3,21 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { AuthContext } from '../../context/AuthContext';
+import Alert from '@material-ui/lab/Alert';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Container from '@material-ui/core/Container';
-import Alert from '@material-ui/lab/Alert';
-import { AuthContext } from '../../context/AuthContext';
-import './Login.css';
+import { useHistory } from "react-router-dom";
+import './Register.css';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        '& > * + *': {
-            marginTop: theme.spacing(2),
-        },
-    },
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -48,17 +41,21 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
+const Register = ({ setPopover, handleCloseRegisterMd }) => {
     const classes = useStyles();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const { handleRegister, errRegister, setErrRegister } = useContext(AuthContext)
     const [errEmail, setErrEmail] = useState('');
     const [errPassword, setErrPassword] = useState('');
-    const { handleLogin, errLogin } = useContext(AuthContext)
+    const [confPassword, setConfPassword] = useState('')
     const [openBackdrop, setOpenBackdrop] = useState(false);
+    let history = useHistory();
+
 
     useEffect(() => {
-        if (errLogin) {
+        if (errRegister) {
             setOpenBackdrop(false)
         }
         else {
@@ -66,7 +63,7 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
         }
         return () => {
         }
-    }, [errLogin])
+    }, [errRegister])
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value)
@@ -76,7 +73,11 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
         setPassword(e.target.value)
     }
 
-    // validate email
+    const handleChangeConfirmPassword = (e) => {
+        setConfirmPassword(e.target.value)
+    }
+
+    // validate email field
     const handleBlurEmail = () => {
         setErrEmail('')
         if (!email) {
@@ -94,7 +95,7 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
     // validate password
     const handleBlurPassword = () => {
         setErrPassword('')
-        if (!password) {
+        if(!password){
             return setErrPassword("Password can't empty")
         }
         if (password.length < 6) {
@@ -102,11 +103,16 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
         }
     }
 
-    const handleCloseBackdrop = () => {
-        setOpenBackdrop(false);
+    // validate confirm password
+    const handleBlurConfirmPassword = () => {
+        setConfPassword('');
+        if(password !== confirmPassword || !confirmPassword){
+            setConfPassword('rePassword incorrect')
+        }
     }
 
-    const handelSubmitLogin = async (e) => {
+    // submit register account
+    const handelSubmitRegister = async (e) => {
         e.preventDefault();
         setOpenBackdrop(true)
         if (errEmail && errPassword) {
@@ -114,35 +120,39 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
             return false
         }
         else {
-            const rs = await handleLogin(email, password)
-            // setPopover(null)
+            const rs = await handleRegister(email, password)
             if (rs) {
-                // setPopover(null)
-                setPopover(null)
-                handleCloseLoginMd()
-                handleClickSnackBar()
                 setOpenBackdrop(false)
+                handleCloseRegisterMd()
+                setPopover(null)
             }
         }
+    }
 
+    const handleCloseBackdrop = () => {
+        setOpenBackdrop(false);
+    }
+
+    const handleCloseRegister = () => {
+        setErrRegister('')
     }
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container onBlur={handleCloseRegister} component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Sign up
                 </Typography>
                 {
-                    errLogin ?
-                        <Alert severity="error">{errLogin}!</Alert>
+                    errRegister ?
+                        <Alert severity="error">{errRegister}!</Alert>
                         : null
                 }
-                <form onSubmit={(e) => handelSubmitLogin(e)} className={classes.form} noValidate>
+                <form onSubmit={(e) => handelSubmitRegister(e)} className={classes.form} noValidate>
                     <TextField
                         error={errEmail ? true : false}
                         helperText={errEmail}
@@ -156,8 +166,8 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
                         autoComplete="email"
                         autoFocus
                         value={email}
-                        onBlur={() => handleBlurEmail()}
                         onChange={(e) => handleChangeEmail(e)}
+                        onBlur={() => handleBlurEmail()}
                     />
                     <TextField
                         error={errPassword ? true : false}
@@ -175,10 +185,26 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
                         onBlur={() => handleBlurPassword()}
                         onChange={(e) => handleChangePassword(e)}
                     />
-                    <FormControlLabel
+                    <TextField
+                        error={confPassword ? true : false}
+                        helperText={confPassword}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="ConfirmPassword"
+                        label="ConfirmPassword"
+                        type="password"
+                        id="ConfirmPassword"
+                        autoComplete="current-password"
+                        value={confirmPassword}
+                        onBlur={()=>handleBlurConfirmPassword()}
+                        onChange={(e) => handleChangeConfirmPassword(e)}
+                    />
+                    {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
-                    />
+                    /> */}
                     <Button
                         type="submit"
                         fullWidth
@@ -186,7 +212,7 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        Register
                     </Button>
                     <Grid container>
                         <Grid item xs>
@@ -196,7 +222,7 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
                         </Grid>
                         <Grid item>
                             <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                {"Do have an account? Login"}
                             </Link>
                         </Grid>
                     </Grid>
@@ -211,4 +237,4 @@ const Login = ({ handleClickSnackBar, setPopover, handleCloseLoginMd }) => {
     );
 }
 
-export default Login;
+export default Register;

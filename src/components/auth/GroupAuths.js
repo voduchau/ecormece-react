@@ -1,33 +1,40 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import './GroupAuths.css'
-import Modal from '@material-ui/core/Modal';
-import Login from './Login';
+// import Modal from '@material-ui/core/Modal';
+// import Login from './Login';
+import ModalLogin from './ModalLogin';
+import ModalRegister from './ModalRegister';
 
 
-function getModalStyle() {
-    const top = 50;
-    const left = 50;
+// function getModalStyle() {
+//     const top = 50;
+//     const left = 50;
 
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-    };
-}
+//     return {
+//         top: `${top}%`,
+//         left: `${left}%`,
+//         transform: `translate(-${top}%, -${left}%)`,
+//     };
+// }
 
-const GroupAuths = ({ handleClosePopover }) => {
+const GroupAuths = ({setPopover, handleClickSnackBar}) => {
 
-    const [modalStyle] = useState(getModalStyle);
-    const [open, setOpen] = useState(false);
+    // const [modalStyle] = useState(getModalStyle);
+    const [openLogin, setOpenLogin] = useState(false);
+    const [openRegister, setOpenRegister] = useState(false);
 
     const handleClickLogin = () => {
-        setOpen(true)
-        // handleClosePopover(null)
+        setOpenLogin(true)
     }
-    const handleClose = () => {
-        console.log('close handle')
-        setOpen(false);
+    const handleCloseLogin = () => {
+        setOpenLogin(false);
+    };
+    const handleClickRegister = () => {
+        setOpenRegister(true)
+    }
+    const handleCloseRegister = () => {
+        setOpenRegister(false);
     };
     return (
         <div className="group-auths">
@@ -45,6 +52,7 @@ const GroupAuths = ({ handleClosePopover }) => {
                 className="group-auths-btn btn-register"
                 color="primary"
                 disableElevation
+                onClick={handleClickRegister}
             >
                 Register
             </Button>
@@ -56,34 +64,8 @@ const GroupAuths = ({ handleClosePopover }) => {
             >
                 Login Facebook
             </Button>
-
-            {/* modal login */}
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                // disableEnforceFocus
-            >
-                <div style={modalStyle} className="body-modal-login">
-                    <Login />
-                </div>
-            </Modal>
-            {/* end */}
-
-            {/* modal register */}
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                // disableEnforceFocus
-            >
-                <div style={modalStyle} className="body-modal-login">
-                    <Login />
-                </div>
-            </Modal>
-            {/* end */}
+            <ModalLogin handleClickSnackBar={handleClickSnackBar} setPopover={setPopover} openLogin={openLogin} handleCloseLogin={handleCloseLogin}  />
+            <ModalRegister setPopover={setPopover} openRegister={openRegister} handleCloseRegister={handleCloseRegister} />
         </div>
     );
 }

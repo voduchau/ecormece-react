@@ -52,6 +52,9 @@
   border: 1px solid white !important;
   margin-bottom: 7px !important;
 }
+.btn-login-hide {
+  display: none !important;
+}
 .alertCart {
   min-height: 0px;
   width: 356px;
