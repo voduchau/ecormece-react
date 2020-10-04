@@ -11,6 +11,8 @@ import {
 import ShopingGridScreen from './screens/shopinggrid/ShopingGridScreen';
 import ShopDetailScreen from './screens/shopDetail/ShopDetailScreen';
 import NoMatchScreen from './screens/nomatch/NoMatchScreen';
+import DashBoardScreen from './screens/admin/DashBoardScreen';
+import DashBoardProducts from './screens/admin/DashBoardProducts';
 
 function App() {
   return (
@@ -39,6 +41,14 @@ function App() {
         <Route path="/checkout">
           <CheckoutScreen />
         </Route>
+        
+        <Route exact path="/dashboard/products">
+          <DashBoardProducts />
+        </Route>
+        <Route path="/dashboard">
+          <DashBoardScreen />
+        </Route>
+
         <Route exact path="/">
           <HomepageScreen />
         </Route>

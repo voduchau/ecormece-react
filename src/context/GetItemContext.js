@@ -32,7 +32,7 @@ const GetItemProvider = (props) => {
     const [item, dispatch] = useReducer(reducer, initItem);
 
     const FilterItem = (value, ...param) => {
-        // console.log('run')
+        console.log('run')
         if (param[0]) {
             let temp = []
             item.products.map(item1 => {
