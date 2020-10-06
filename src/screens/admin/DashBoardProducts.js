@@ -3,6 +3,7 @@ import './DashBoardScreen.css'
 import MenuDashBoard from '../../components/admin/MenuDashBoard';
 import { GetItemContext } from '../../context/GetItemContext';
 import FormAddProduct from '../../components/admin/FormAddProduct';
+import firebaseApp from '../../firebase/firebaseApp';
 
 const DashBoardProducts = () => {
     const productModal = useRef(null);
@@ -13,21 +14,32 @@ const DashBoardProducts = () => {
 
     }, [])
 
+    const handleDelete = async (productID) => {
+        console.log(productID,'id')
+        await firebaseApp.database().ref('products/').on('value', async (snapshot) => {
+            for(let key in snapshot.val()){
+                if(snapshot.val()[key].productID === productID) {
+                    await firebaseApp.database().ref('products/'+ key).remove();
+                } 
+            }
+        })
+    }
+
     const renderItem = () => {
         console.log(item,'this itme')
-        // return item.products && item.products.map(product => {
-        //     return (
-        //         <tr>
-        //             <td>{product.productName}</td>
-        //             <td>{product.price}</td>
-        //             <td>{product.saleof}%</td>
-        //             <td className="table__action">
-        //                 <button className="table__action-delete">delete</button>
-        //                 <button className="table__action-view">view</button>
-        //             </td>
-        //         </tr>
-        //     )
-        // })
+        return item.products && item.products.map(product => {
+            return (
+                <tr>
+                    <td>{product.productName}</td>
+                    <td>{product.price}</td>
+                    <td>{product.saleof}%</td>
+                    <td className="table__action">
+                        <button onClick={() => handleDelete(product.productID)} className="table__action-delete">delete</button>
+                        <button className="table__action-view">view</button>
+                    </td>
+                </tr>
+            )
+        })
     }
 
     const handleShowModal = () => {

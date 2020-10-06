@@ -62,9 +62,9 @@
     font-size: 18px;
     font-weight: 600;
 }
-.active {
+/* .active {
     background-image: linear-gradient(90deg, #E1ECEC, white);
-}
+} */
 .dashboard__products table {
     font-family: arial, sans-serif;
     border-collapse: collapse;

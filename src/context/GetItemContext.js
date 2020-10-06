@@ -61,18 +61,29 @@ const GetItemProvider = (props) => {
     }
     const GetAllProducts = () => {
         firebaseApp.database().ref("products/").on("value", async (snapshot) => {
+            const tempProduct = []
+            console.log(snapshot.val(),'this snapshot')
+            for(const key in snapshot.val()){
+                tempProduct.push(snapshot.val()[key])
+            }
             await dispatch({
                 type: "GET_PRODUCT",
-                payload: snapshot.val()
+                payload: tempProduct
             })
         })
     }
     useEffect(() => {
         // get all products
         firebaseApp.database().ref("products/").on("value", async (snapshot) => {
+            const tempProduct = []
+            console.log(snapshot.val(),'trong effect')
+            for(const key in snapshot.val()){
+                tempProduct.push(snapshot.val()[key])
+            }
+            console.log(tempProduct,'temp')
             await dispatch({
                 type: "GET_PRODUCT",
-                payload: snapshot.val()
+                payload: tempProduct
             })
         })
 

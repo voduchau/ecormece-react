@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import firebaseApp from '../../firebase/firebaseApp';
-
+import { v4 as uuidv4 } from 'uuid';
 
 var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 
@@ -8,15 +8,16 @@ const FormAddProduct = () => {
     const [product,setProduct] = useState({name: '',price:'',category:'',saleof:'',description:'',image:''})
 
     //cate, date, description, img, price, productID, productName, saleof
-    const AddProduct = () => {
-        firebaseApp.database().ref('products/').push({
-            cate: '1',
+    const AddProduct = async () => {
+        await firebaseApp.database().ref('products/').push({
+            cate: '1 2',
             date: utc,
             description: product.description,
             img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjQzMzEwfQ&w=1000&q=80',
             price: product.price,
             productName: product.name,
-            saleof: product.saleof
+            saleof: product.saleof,
+            productID: uuidv4()
         })
     }
 
