@@ -6,19 +6,36 @@ var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 
 const FormAddProduct = () => {
     const [product,setProduct] = useState({name: '',price:'',category:'',saleof:'',description:'',image:''})
-
+    const [imageAsFile, setImageAsFile] = useState('')
+    const [imageAsUrl, setImageAsUrl] = useState('')
     //cate, date, description, img, price, productID, productName, saleof
     const AddProduct = async () => {
-        await firebaseApp.database().ref('products/').push({
-            cate: '1 2',
-            date: utc,
-            description: product.description,
-            img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjQzMzEwfQ&w=1000&q=80',
-            price: product.price,
-            productName: product.name,
-            saleof: product.saleof,
-            productID: uuidv4()
-        })
+        if(imageAsFile === '') {
+            console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
+          }
+        const uploadTask = firebaseApp.storage().ref(`/images/${imageAsFile.name}`).put(imageAsFile)
+        uploadTask.on('state_changed',(snapshot) => {
+            console.log(snapshot,'handle upload image')
+        }, (error) => {
+            console.log(error, 'error when upload image to storage')
+        }, () => {
+            firebaseApp.storage().ref('images').child(imageAsFile.name).getDownloadURL()
+            .then(async (url)=>{
+                setImageAsUrl(prevObject => ({...prevObject, imgUrl: url}))
+                await firebaseApp.database().ref('products/').push({
+                    cate: '1 2',
+                    date: utc,
+                    description: product.description,
+                    img: url,
+                    price: product.price,
+                    productName: product.name,
+                    saleof: parseInt(product.saleof),
+                    productID: uuidv4()
+                })
+            })
+        }
+
+        )
     }
 
     const handleChangeName = (e) => {
@@ -35,6 +52,12 @@ const FormAddProduct = () => {
 
     const handleChangeSale = (e) => {
         setProduct({...product,saleof: e.target.value})
+    }
+
+    const handleChangeImage = (e) => {
+        // console.log(e.target.files[0],'this e')
+        const image = e.target.files[0]
+        setImageAsFile(imageFile => (image))
     }
 
     const handleChangeDescription = (e) => {
@@ -83,7 +106,7 @@ const FormAddProduct = () => {
             <input onChange={(e) => handleChangeSale(e)} type="text" id="saleof" name="saleof" placeholder="sale" />
 
             <label>Image:</label>
-            <input type="file" id="image" name="image" />
+            <input onChange={(e) => handleChangeImage(e)} type="file" id="image" name="image" />
 
             <label>Description</label>
             <textarea onChange={(e) => handleChangeDescription(e)} id="description">

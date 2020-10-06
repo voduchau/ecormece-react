@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import user1 from '../../images/user1.jpg'
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import './Header.css'
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import { AuthContext } from '../../context/AuthContext';
 import FaceIcon from '@material-ui/icons/Face';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { useHistory } from "react-router-dom";
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -75,13 +76,19 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 
+
 const Profile = ({ setAnchorElProfile, anchorElProfile, handleCloseProfile }) => {
     const { handleLogOut, user } = useContext(AuthContext)
-    console.log(user,'userrr')
+    let history = useHistory();
     const handleClickLogOut = () => {
         setAnchorElProfile(null)
         handleLogOut()
     }
+
+    const GoToDashBoard = () => {
+        history.push('/dashboard')
+    }
+
     return (
         <div className="profile-setting">
             <StyledMenu
@@ -115,6 +122,14 @@ const Profile = ({ setAnchorElProfile, anchorElProfile, handleCloseProfile }) =>
                     </ListItemIcon>
                     <ListItemText primary="Change password" />
                 </StyledMenuItem>
+
+                <StyledMenuItem onClick={()=>GoToDashBoard()}>
+                    <ListItemIcon>
+                        <DashboardIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Go to Dashboard" />
+                </StyledMenuItem>
+
                 <StyledMenuItem onClick={()=>handleClickLogOut()}>
                     <ListItemIcon>
                         <ExitToAppIcon fontSize="small" />
