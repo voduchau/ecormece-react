@@ -19,6 +19,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Profile from './Profile';
+import firebaseApp from '../../firebase/firebaseApp';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -72,7 +73,18 @@ const HeaderCart = () => {
     const [anchorElProfile, setAnchorElProfile] = React.useState(null);
 
     useEffect(() => {
-
+        firebaseApp.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              user.getIdToken(true).then(function(idToken) {
+                // Send token to your backend via HTTPS
+                console.log(idToken,'id token')
+              }).catch(function(error) {
+                // Handle error
+              });
+            } else {
+              // No user is signed in.
+            }
+          });
     }, [])
 
     const handleClickSnackBar = () => {

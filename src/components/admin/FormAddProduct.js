@@ -13,7 +13,7 @@ const FormAddProduct = () => {
         if(imageAsFile === '') {
             console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
           }
-        const uploadTask = firebaseApp.storage().ref(`/images/${imageAsFile.name}`).put(imageAsFile)
+        const uploadTask = firebaseApp.storage().ref(`/images/product/${imageAsFile.name}`).put(imageAsFile)
         uploadTask.on('state_changed',(snapshot) => {
             console.log(snapshot,'handle upload image')
         }, (error) => {

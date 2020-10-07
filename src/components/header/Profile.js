@@ -80,10 +80,13 @@ const StyledMenuItem = withStyles((theme) => ({
 const Profile = ({ setAnchorElProfile, anchorElProfile, handleCloseProfile }) => {
     const { handleLogOut, user } = useContext(AuthContext)
     let history = useHistory();
+
     const handleClickLogOut = () => {
         setAnchorElProfile(null)
         handleLogOut()
     }
+
+    
 
     const GoToDashBoard = () => {
         history.push('/dashboard')

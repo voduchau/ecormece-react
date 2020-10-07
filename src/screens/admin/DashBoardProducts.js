@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import './DashBoardScreen.css'
 import MenuDashBoard from '../../components/admin/MenuDashBoard';
 import { GetItemContext } from '../../context/GetItemContext';
@@ -7,7 +7,7 @@ import firebaseApp from '../../firebase/firebaseApp';
 
 const DashBoardProducts = () => {
     const productModal = useRef(null);
-
+    const [out,setOut] = useState(false)
     const { item } = useContext(GetItemContext)
 
     useEffect(() => {
@@ -15,18 +15,18 @@ const DashBoardProducts = () => {
     }, [])
 
     const handleDelete = async (productID) => {
-        console.log(productID,'id')
+        console.log(productID, 'id')
         await firebaseApp.database().ref('products/').on('value', async (snapshot) => {
-            for(let key in snapshot.val()){
-                if(snapshot.val()[key].productID === productID) {
-                    await firebaseApp.database().ref('products/'+ key).remove();
-                } 
+            for (let key in snapshot.val()) {
+                if (snapshot.val()[key].productID === productID) {
+                    await firebaseApp.database().ref('products/' + key).remove();
+                }
             }
         })
     }
 
     const renderItem = () => {
-        console.log(item,'this itme')
+        console.log(item, 'this itme')
         return item.products && item.products.map(product => {
             return (
                 <tr>
@@ -46,6 +46,8 @@ const DashBoardProducts = () => {
         productModal.current.style.display = "flex"
     }
     const handleCloseModal = () => {
+        setOut(true)
+        setOut(false)
         productModal.current.style.display = "none"
     }
 
@@ -56,28 +58,28 @@ const DashBoardProducts = () => {
                 <input className="dashboard__products_search" placeholder="search" />
                 <button onClick={() => handleShowModal()} id="addBtn" className="dashboard__products__add">Add new</button>
 
-                <div ref={productModal} id="ProductModal" className="modal_product fadeIn">
+                <div ref={productModal} id="ProductModal" className={`modal_product fadeIn click ${out ? 'out' : null}`}>
                     <div className="modalContent">
                         <div className="modalContent-text">
                             <FormAddProduct />
                         </div>
-                            <span onClick={() => handleCloseModal()} className="close">&times;</span>
-                        </div>
+                        <span onClick={() => handleCloseModal()} className="close">&times;</span>
                     </div>
-
-                    <table>
-                        <tr>
-                            <th>ProductName</th>
-                            <th>Price</th>
-                            <th>sale of</th>
-                            <th>Action</th>
-                        </tr>
-                        {
-                            renderItem()
-                        }
-                    </table>
                 </div>
+
+                <table>
+                    <tr>
+                        <th>ProductName</th>
+                        <th>Price</th>
+                        <th>sale of</th>
+                        <th>Action</th>
+                    </tr>
+                    {
+                        renderItem()
+                    }
+                </table>
             </div>
+        </div>
     );
 }
 

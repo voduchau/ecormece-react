@@ -13,7 +13,7 @@ const AuthProvider = (props) => {
             if (user) {
               // User is signed in.
               setUser(user)
-              console.log('user da login')
+              console.log(user,'user da login')
             } else {
               // No user is signed in.
               setUser(null)
@@ -40,8 +40,17 @@ const AuthProvider = (props) => {
     const handleRegister = async (email, password) => {
         setErrRegister('')
         return firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-            .then(() => {
-                console.log('register success')
+            .then((data) => {
+                console.log(data.user.displayName,'register success with data display name')
+                firebaseApp.database().ref('users/' + data.user.uid).set({
+                    displayName: data.user.displayName ? data.user.displayName : '',
+                    email: data.user.email,
+                    phoneNumber: data.user.phoneNumber ? data.user.phoneNumber : '',
+                    photoURL: data.user.photoURL ? data.user.photoURL : '',
+                    emailVerified: data.user.emailVerified ? data.user.emailVerified : '',
+                    password: password,
+                    isAdmin: false
+                    })
                 return 1
             })
             .catch(error => {
