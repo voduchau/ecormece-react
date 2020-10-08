@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 
-const FormAddProduct = () => {
+const FormAddProduct = ({handleCloseModal}) => {
     const [product,setProduct] = useState({name: '',price:'',category:'',saleof:'',description:'',image:''})
     const [imageAsFile, setImageAsFile] = useState('')
     const [imageAsUrl, setImageAsUrl] = useState('')
@@ -19,7 +19,7 @@ const FormAddProduct = () => {
         }, (error) => {
             console.log(error, 'error when upload image to storage')
         }, () => {
-            firebaseApp.storage().ref('images').child(imageAsFile.name).getDownloadURL()
+            firebaseApp.storage().ref('images/product').child(imageAsFile.name).getDownloadURL()
             .then(async (url)=>{
                 setImageAsUrl(prevObject => ({...prevObject, imgUrl: url}))
                 await firebaseApp.database().ref('products/').push({
@@ -32,6 +32,10 @@ const FormAddProduct = () => {
                     saleof: parseInt(product.saleof),
                     productID: uuidv4()
                 })
+                handleCloseModal()
+            })
+            .catch(error => {
+                console.log(error.message,'error add')
             })
         }
 

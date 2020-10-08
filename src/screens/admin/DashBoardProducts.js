@@ -61,7 +61,7 @@ const DashBoardProducts = () => {
                 <div ref={productModal} id="ProductModal" className={`modal_product fadeIn click ${out ? 'out' : null}`}>
                     <div className="modalContent">
                         <div className="modalContent-text">
-                            <FormAddProduct />
+                            <FormAddProduct handleCloseModal={handleCloseModal} />
                         </div>
                         <span onClick={() => handleCloseModal()} className="close">&times;</span>
                     </div>
