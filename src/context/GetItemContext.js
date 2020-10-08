@@ -37,7 +37,6 @@ const GetItemProvider = (props) => {
             let temp = []
             item.products.map(item1 => {
                 if (item1.productName.toLowerCase().includes(param[0].toLowerCase())) {
-                    console.log('xx')
                     temp.push(item1)
                 }
             })

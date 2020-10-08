@@ -12,7 +12,10 @@ const AuthProvider = (props) => {
         firebaseApp.auth().onAuthStateChanged(function(user) {
             if (user) {
               // User is signed in.
-              setUser(user)
+              firebaseApp.database().ref('users/' + user.uid).on('value', (snapshot) =>{
+                setUser(snapshot.val())
+              })
+            //   setUser(user)
               console.log(user,'user da login')
             } else {
               // No user is signed in.
@@ -26,8 +29,10 @@ const AuthProvider = (props) => {
         setErrLogin('')
         return await firebaseApp.auth().signInWithEmailAndPassword(email, password)
         .then((data)=>{
-            console.log(data,'login success')
-            setUser(data.user)
+            firebaseApp.database().ref('users/' + data.user.uid).on('value',(snapshot)=>{
+                setUser(snapshot.val())
+            })
+            // setUser(data.user)
             return 1
         })
         .catch(function (error) {
@@ -41,7 +46,6 @@ const AuthProvider = (props) => {
         setErrRegister('')
         return firebaseApp.auth().createUserWithEmailAndPassword(email, password)
             .then((data) => {
-                console.log(data.user.displayName,'register success with data display name')
                 firebaseApp.database().ref('users/' + data.user.uid).set({
                     displayName: data.user.displayName ? data.user.displayName : '',
                     email: data.user.email,

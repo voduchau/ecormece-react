@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import HomepageScreen from './screens/homepage/HomepageScreen';
 import ShopingCartScreen from './screens/shopingCart/ShopingCartScreen';
@@ -13,8 +13,12 @@ import ShopDetailScreen from './screens/shopDetail/ShopDetailScreen';
 import NoMatchScreen from './screens/nomatch/NoMatchScreen';
 import DashBoardScreen from './screens/admin/DashBoardScreen';
 import DashBoardProducts from './screens/admin/DashBoardProducts';
+import { AuthContext } from './context/AuthContext';
+import PrivateRoute from './route/PrivateRoute';
 
 function App() {
+  const { user } = useContext(AuthContext)
+
   return (
     <Router>
       <Switch>
@@ -41,13 +45,17 @@ function App() {
         <Route path="/checkout">
           <CheckoutScreen />
         </Route>
-        
-        <Route exact path="/dashboard/products">
-          <DashBoardProducts />
-        </Route>
-        <Route path="/dashboard">
-          <DashBoardScreen />
-        </Route>
+{/* 
+        {user && user.isAdmin ?
+          <>
+            <Route exact path="/dashboard/products" component={DashBoardProducts} />
+            <Route path="/dashboard" component={DashBoardScreen} />
+          </>
+
+          : null
+        } */}
+        <PrivateRoute user={user} path='/dashboard/products' component={DashBoardProducts}/>
+        <PrivateRoute exact user={user} path='/dashboard' component={DashBoardScreen}/>
 
         <Route exact path="/">
           <HomepageScreen />

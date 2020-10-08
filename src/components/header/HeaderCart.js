@@ -77,7 +77,7 @@ const HeaderCart = () => {
             if (user) {
               user.getIdToken(true).then(function(idToken) {
                 // Send token to your backend via HTTPS
-                console.log(idToken,'id token')
+                // console.log(idToken,'id token')
               }).catch(function(error) {
                 // Handle error
               });

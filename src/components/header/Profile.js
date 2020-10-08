@@ -86,7 +86,7 @@ const Profile = ({ setAnchorElProfile, anchorElProfile, handleCloseProfile }) =>
         handleLogOut()
     }
 
-    
+
 
     const GoToDashBoard = () => {
         history.push('/dashboard')
@@ -126,14 +126,17 @@ const Profile = ({ setAnchorElProfile, anchorElProfile, handleCloseProfile }) =>
                     <ListItemText primary="Change password" />
                 </StyledMenuItem>
 
-                <StyledMenuItem onClick={()=>GoToDashBoard()}>
-                    <ListItemIcon>
-                        <DashboardIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Go to Dashboard" />
-                </StyledMenuItem>
+                {user && user.isAdmin ?
+                    <StyledMenuItem onClick={() => GoToDashBoard()}>
+                        <ListItemIcon>
+                            <DashboardIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Go to Dashboard" />
+                    </StyledMenuItem> :
+                    null
+                }
 
-                <StyledMenuItem onClick={()=>handleClickLogOut()}>
+                <StyledMenuItem onClick={() => handleClickLogOut()}>
                     <ListItemIcon>
                         <ExitToAppIcon fontSize="small" />
                     </ListItemIcon>
