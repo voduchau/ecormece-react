@@ -1,9 +1,9 @@
 import React from 'react';
 
-const FormViewProduct = ({handleCloseModalView}) => {
-    
+const FormViewProduct = ({ handleCloseModalView, product }) => {
+
     const AddProduct = async () => {
-       
+
     }
 
     const handleChangeName = (e) => {
@@ -23,7 +23,7 @@ const FormViewProduct = ({handleCloseModalView}) => {
     }
 
     const handleChangeDescription = (e) => {
-        
+
     }
 
     const handleSubmitAdd = (e) => {
@@ -35,6 +35,7 @@ const FormViewProduct = ({handleCloseModalView}) => {
             <input
                 type="text"
                 id="fname"
+                value={product.productName}
                 name="firstname"
                 placeholder="Your name.."
                 onChange={(e) => handleChangeName(e)}
@@ -45,6 +46,7 @@ const FormViewProduct = ({handleCloseModalView}) => {
                 type="text"
                 id="lname"
                 name="lastname"
+                value={product.price}
                 placeholder="Your last name.."
                 onChange={(e) => handleChangePrice(e)}
             />
@@ -63,17 +65,31 @@ const FormViewProduct = ({handleCloseModalView}) => {
             </select>
 
             <label>sale of (%)</label>
-            <input onChange={(e) => handleChangeSale(e)} type="text" id="saleof" name="saleof" placeholder="sale" />
-
-            <label>Image:</label>
-            <input onChange={(e) => handleChangeImage(e)} type="file" id="image" name="image" />
+            <input
+                onChange={(e) => handleChangeSale(e)}
+                type="text" id="saleof" name="saleof"
+                placeholder="sale"
+                value={product.saleof}
+            />
+            <img className="image_product_view" src={product.img} />
+            <label>Change Image:</label>
+            <input
+                onChange={(e) => handleChangeImage(e)}
+                type="file"
+                id="image"
+                name="image"
+            />
 
             <label>Description</label>
-            <textarea onChange={(e) => handleChangeDescription(e)} id="description">
+            <textarea
+                onChange={(e) => handleChangeDescription(e)}
+                id="description"
+                value={product.description}
+            >
 
             </textarea>
 
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Update" />
         </form>
     );
 }

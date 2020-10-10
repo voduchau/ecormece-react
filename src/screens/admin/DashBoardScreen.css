@@ -155,10 +155,23 @@
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
+#option_cate_none {
+  display: none;
+}
+.image_product_view {
+  width: 25%;
+  align-items: center;
+  padding: 5px;
+  margin: auto;
+}
+.image_product_add {
+  width: 70%;
+  margin: auto;
+}
 .modal_view_content {
   display: flex;
   background: white;
-  margin: 3rem auto;
+  margin: auto;
   padding: 35px;
   width: 40%;
   position: relative;
@@ -167,7 +180,7 @@
   background-color: white;
   padding: 20px;
   width: 40%;
-  margin: 3rem 30%;
+  margin: auto;
   display: flex;
   position: relative;
 }
@@ -275,6 +288,7 @@
 }
 #description {
   margin-bottom: 15px;
+  height: 138px;
 }
 #saleof {
   margin-bottom: 10px;

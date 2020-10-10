@@ -9,9 +9,9 @@ import FormViewProduct from '../../components/admin/FormViewProduct';
 const DashBoardProducts = () => {
     const productModal = useRef(null);
     const modalView = useRef(null);
-    const [out, setOut] = useState(false)
+    const [isOpenAdd, setIsOpenAdd] = useState(false)
     const { item } = useContext(GetItemContext)
-
+    const [productView, setProductView] = useState({})
     useEffect(() => {
 
     }, [])
@@ -27,7 +27,8 @@ const DashBoardProducts = () => {
         })
     }
 
-    const handleView = (productID) => {
+    const handleView = (product) => {
+        setProductView(product)
         modalView.current.style.display = "flex"
     }
     const handleCloseModalView = () => {
@@ -43,7 +44,7 @@ const DashBoardProducts = () => {
                     <td className="product__sale">{product.saleof}%</td>
                     <td className="table__action">
                         <button onClick={() => handleDelete(product.productID)} className="table__action-delete">delete</button>
-                        <button onClick={() => handleView(product.productID)} className="table__action-view">view</button>
+                        <button onClick={() => handleView(product)} className="table__action-view">view</button>
                     </td>
                 </tr>
             )
@@ -51,10 +52,11 @@ const DashBoardProducts = () => {
     }
 
     const handleShowModal = () => {
+        setIsOpenAdd(true)
         productModal.current.style.display = "flex"
     }
     const handleCloseModal = () => {
-        // setOut(true)
+        setIsOpenAdd(false)
         productModal.current.style.display = "none"
     }
 
@@ -68,7 +70,7 @@ const DashBoardProducts = () => {
                 <div ref={productModal} id="ProductModal" className={`modal_product`}>
                     <div className="modalContent">
                         <div className="modalContent-text">
-                            <FormAddProduct handleCloseModal={handleCloseModal} />
+                            <FormAddProduct isOpenAdd={isOpenAdd} handleCloseModal={handleCloseModal} />
                         </div>
                         <span onClick={() => handleCloseModal()} className="close">&times;</span>
                     </div>
@@ -78,7 +80,7 @@ const DashBoardProducts = () => {
                 <div ref={modalView} id="modalView" className="modal_view">
                     <div className="modal_view_content">
                         <div className="modal_form_view">
-                            <FormViewProduct handleCloseModalView={handleCloseModalView} />
+                            <FormViewProduct product={productView} handleCloseModalView={handleCloseModalView} />
                         </div>
                         <span onClick={() => handleCloseModalView()} className="closeView">&times;</span>
                     </div>
